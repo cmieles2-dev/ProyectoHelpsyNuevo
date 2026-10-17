@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi perfil — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Tu cuenta y tus preferencias de notificaciones.
+            </p>
+
+            <div class="grid-dos">
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Datos personales</h2>
+                            <p>Actualiza tu nombre y correo de contacto.</p>
+                        </div>
+                    </div>
+                    <form id="form-perfil">
+                        <div class="campo" style="margin-bottom: 14px;">
+                            <label for="perfil-nombre">Nombre completo</label>
+                            <input type="text" class="input-simple" id="perfil-nombre" maxlength="60" required>
+                            <small class="campo-error" id="error-perfil-nombre"></small>
+                        </div>
+                        <div class="campo" style="margin-bottom: 14px;">
+                            <label for="perfil-fecha-nacimiento">Fecha de nacimiento</label>
+                            <input type="date" class="input-simple" id="perfil-fecha-nacimiento">
+                            <small class="campo-error" id="error-perfil-fecha"></small>
+                        </div>
+                        <div class="campo">
+                            <label for="perfil-email">Correo electrónico</label>
+                            <input type="email" class="input-simple" id="perfil-email" autocomplete="email" required>
+                            <small class="campo-error" id="error-perfil-email"></small>
+                        </div>
+                        <p class="campo-nota oculto" id="aviso-verificacion-perfil" role="status" style="margin-top: 12px;">
+                            El correo cambió. Verifícalo con este enlace de prueba (vence en 15 minutos):
+                            <a id="link-verificacion-perfil" href="#">Verificar correo</a>
+                        </p>
+                        <button type="submit" class="btn btn-primario btn-ancho" style="margin-top: 14px;">Guardar datos</button>
+                    </form>
+                </div>
+
+                <div class="tarjeta oculto" id="tarjeta-perfil-especialista">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Perfil profesional</h2>
+                            <p>Completa tu presentación y las categorías de atención.</p>
+                        </div>
+                    </div>
+                    <form id="form-perfil-especialista">
+                        <div class="campo" style="margin-bottom:14px;">
+                            <label for="perfil-titulo-profesional">Título profesional</label>
+                            <input type="text" class="input-simple" id="perfil-titulo-profesional" maxlength="120" required>
+                        </div>
+                        <div class="campo" style="margin-bottom:14px;">
+                            <label for="perfil-registro-profesional">Registro profesional</label>
+                            <input type="text" class="input-simple" id="perfil-registro-profesional" maxlength="60" required>
+                        </div>
+                        <div class="campo" style="margin-bottom: 14px;">
+                            <label for="perfil-bio">Presentación profesional</label>
+                            <textarea class="input-simple" id="perfil-bio" rows="5" maxlength="1000" required></textarea>
+                        </div>
+                        <div class="campo">
+                            <label for="perfil-categorias">Categorías profesionales</label>
+                            <select class="select-simple" id="perfil-categorias" multiple size="4" required></select>
+                            <small class="campo-nota">Para seleccionar varias, mantén Ctrl (Windows) o Command (Mac).</small>
+                        </div>
+                        <button type="submit" class="btn btn-primario btn-ancho" style="margin-top: 14px;">Guardar perfil profesional</button>
+                    </form>
+                    <section style="margin-top: 20px; border-top: 1px solid var(--gris-200); padding-top: 18px;">
+                        <h3>Disponibilidad semanal</h3>
+                            <p class="campo-nota">Selecciona tus días y franjas. Las citas confirmadas se conservan; si un cambio las afecta, se notificará a las personas vinculadas.</p>
+                        <form id="form-disponibilidad-especialista">
+                            <strong>Días de atención</strong>
+                            <div id="dias-disponibilidad" class="lista-simple" style="margin: 8px 0 14px;"></div>
+                            <strong>Franjas horarias</strong>
+                            <div id="horas-disponibilidad" class="lista-simple" style="margin: 8px 0 14px;"></div>
+                            <button type="submit" class="btn btn-primario btn-ancho">Guardar disponibilidad</button>
+                        </form>
+                        <form id="form-bloqueo-disponibilidad" style="margin-top: 16px;">
+                            <div class="campo">
+                                <label for="fecha-bloqueo">Bloquear fecha completa</label>
+                                <input type="date" class="input-simple" id="fecha-bloqueo" required>
+                            </div>
+                            <button type="submit" class="btn btn-fantasma" style="margin-top: 10px;">Agregar bloqueo</button>
+                        </form>
+                        <div id="lista-bloqueos-disponibilidad" class="lista-simple" aria-live="polite" style="margin-top: 12px;"></div>
+                    </section>
+                </div>
+
+                <div class="tarjeta oculto" id="tarjeta-politica-citas">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Política de agenda</h2>
+                            <p>Configura con cuántas horas de anticipación se permite cancelar o reprogramar.</p>
+                        </div>
+                    </div>
+                    <form id="form-politica-citas">
+                        <div class="campo">
+                            <label for="anticipacion-citas">Anticipación mínima (horas)</label>
+                            <input type="number" class="input-simple" id="anticipacion-citas" min="0" max="720" step="1" required>
+                        </div>
+                        <p class="campo-nota">El valor inicial es 24 horas. Solo un administrador puede modificar esta política.</p>
+                        <button type="submit" class="btn btn-primario btn-ancho">Guardar política</button>
+                    </form>
+                </div>
+
+                <div class="tarjeta" id="tarjeta-preferencias">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Preferencias</h2>
+                            <p>Personaliza qué recibes y cómo.</p>
+                        </div>
+                    </div>
+
+                    <div class="preferencia-fila" id="fila-mensajes-motivacionales">
+                        <div>
+                            <strong>Mensaje motivacional diario</strong>
+                            <span>Un mensaje corto en tu panel principal.</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="check-mensajes-motivacionales">
+                            <span class="switch-pista"></span>
+                        </label>
+                    </div>
+
+                    <div class="preferencia-fila">
+                        <div>
+                            <strong>Notificaciones por correo</strong>
+                            <span>Recordatorios de citas también por email.</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="check-notificaciones-correo">
+                            <span class="switch-pista"></span>
+                        </label>
+                    </div>
+
+                    <p class="campo-nota" style="margin-top: 10px;">
+                        Esta demo no envía correos reales (no hay backend ni
+                        servicio de email conectado) — el interruptor solo
+                        guarda tu preferencia para cuando esa parte exista.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Cambiar contraseña</h2>
+                            <p>El prototipo guarda un resumen de la contraseña; requiere backend para protección real.</p>
+                        </div>
+                    </div>
+
+                    <form id="form-cambiar-password">
+                        <div class="campo" style="margin-bottom: 14px;">
+                            <label for="password-actual">Contraseña actual</label>
+                            <input type="password" class="input-simple" id="password-actual" required aria-describedby="error-password-actual">
+                            <small class="campo-error" id="error-password-actual"></small>
+                        </div>
+                        <div class="campo" style="margin-bottom: 14px;">
+                            <label for="password-nueva">Nueva contraseña</label>
+                            <input type="password" class="input-simple" id="password-nueva" minlength="8" required>
+                        </div>
+                        <div class="campo">
+                            <label for="password-nueva-confirmar">Confirmar nueva contraseña</label>
+                            <input type="password" class="input-simple" id="password-nueva-confirmar" minlength="8" required aria-describedby="error-password-nueva">
+                            <small class="campo-error" id="error-password-nueva"></small>
+                        </div>
+                        <button type="submit" class="btn btn-primario btn-ancho" style="margin-top: 14px;">
+                            Actualizar contraseña
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+
+            <section class="tarjeta" style="margin-top: 18px;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Mis datos y privacidad</h2>
+                        <p>Consulta los datos guardados y gestiona solicitudes de privacidad.</p>
+                    </div>
+                </div>
+                <div id="resumen-datos-privacidad" class="lista-simple" aria-live="polite"></div>
+                <div id="consentimientos-privacidad" class="campo-nota"></div>
+                <div id="menores-privacidad" class="tabla-envoltura oculto">
+                    <h3>Perfiles de menores vinculados</h3>
+                    <table class="tabla-datos">
+                        <thead><tr><th>Menor</th><th>Documento</th><th>Fecha de nacimiento</th><th>Consentimiento registrado</th><th></th></tr></thead>
+                        <tbody id="tabla-menores-privacidad"></tbody>
+                    </table>
+                </div>
+                <p class="campo-nota" style="margin-top: 14px;">
+                    Puedes corregir tus datos en este perfil y los datos de un menor en
+                    <a href="menores.html">Mis menores</a>. Una solicitud de supresión
+                    queda pendiente de revisión; esta demo no elimina datos ni simula
+                    una decisión legal.
+                </p>
+                <form id="form-solicitud-supresion" style="margin-top: 16px;">
+                    <div class="campo" style="margin-bottom: 14px;">
+                        <label for="titular-supresion">Titular de los datos</label>
+                        <select class="select-simple" id="titular-supresion" required></select>
+                    </div>
+                    <div class="campo" style="margin-bottom: 14px;">
+                        <label for="motivo-supresion">Motivo de la solicitud (opcional)</label>
+                        <textarea class="input-simple" id="motivo-supresion" rows="2" maxlength="500"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-fantasma">Solicitar supresión</button>
+                </form>
+                <div id="solicitudes-supresion" style="margin-top: 16px;"></div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/perfil.js" defer></script>
+
+</body>
+</html>

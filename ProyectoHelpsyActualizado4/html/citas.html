@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo" id="info-citas"></p>
+
+            <div class="tabs" id="tabs-citas">
+                <button class="tab-btn activo" data-vista="proximas">Próximas y activas</button>
+                <button class="tab-btn" data-vista="historial">Historial de sesiones</button>
+            </div>
+
+            <section class="tarjeta">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2 id="titulo-lista-citas">Tus citas</h2>
+                        <p id="contador-citas">Cargando...</p>
+                    </div>
+                </div>
+                <div class="tabla-envoltura">
+                    <table class="tabla-datos" id="tabla-citas-encabezado">
+                        <thead></thead>
+                        <tbody id="tabla-citas"></tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL: reprogramar -->
+    <div class="modal-overlay" id="modal-reprogramar" role="dialog" aria-modal="true">
+        <div class="modal-caja">
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2>Reprogramar cita</h2>
+                    <p>Elige una nueva fecha y hora.</p>
+                </div>
+                <button class="btn-icono" id="cerrar-modal-reprogramar" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="form-reprogramar">
+                <input type="hidden" id="reprogramar-id">
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="reprogramar-fecha">Nueva fecha</label>
+                    <input type="date" class="input-simple" id="reprogramar-fecha" required>
+                </div>
+                <div class="campo">
+                    <label for="reprogramar-hora">Nueva hora</label>
+                    <select class="select-simple" id="reprogramar-hora" required></select>
+                </div>
+                <p class="campo-nota" id="aviso-politica-reprogramacion"></p>
+                <div class="modal-acciones">
+                    <button type="button" class="btn btn-fantasma" id="cancelar-modal-reprogramar">Cancelar</button>
+                    <button type="submit" class="btn btn-primario">Guardar cambio</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/citas.js" defer></script>
+
+</body>
+</html>

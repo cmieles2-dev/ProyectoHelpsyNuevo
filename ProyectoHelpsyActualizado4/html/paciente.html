@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi panel — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Este es tu espacio: tu próxima cita, cómo te has sentido esta
+                semana y las tareas que tu psicólogo te dejó.
+            </p>
+
+            <div id="mensaje-motivacional"></div>
+
+            <section class="stat-grid" id="stat-grid-paciente"></section>
+
+            <section class="grid-dos">
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Tu próxima cita</h2>
+                            <p>Agendada con tu psicólogo.</p>
+                        </div>
+                        <a href="citas.html" class="btn btn-fantasma btn-sm">Ver todas</a>
+                    </div>
+                    <div id="proxima-cita"></div>
+                </div>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Tu diario emocional</h2>
+                            <p>Últimos registros de tu estado de ánimo.</p>
+                        </div>
+                        <a href="diario.html" class="btn btn-fantasma btn-sm">Escribir hoy</a>
+                    </div>
+                    <div id="diario-resumen"></div>
+                </div>
+
+            </section>
+
+            <section class="tarjeta" style="margin-top: 16px;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Tareas pendientes</h2>
+                        <p>Actividades que tu psicólogo te asignó.</p>
+                    </div>
+                    <a href="tareas.html" class="btn btn-fantasma btn-sm">Ver todas</a>
+                </div>
+                <div id="progreso-semanal-tareas" style="margin-bottom: 14px;"></div>
+                <div id="tareas-resumen"></div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/paciente.js" defer></script>
+
+</body>
+</html>

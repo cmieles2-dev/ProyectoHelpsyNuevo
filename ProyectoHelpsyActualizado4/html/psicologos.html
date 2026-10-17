@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscar psicólogos — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Explora el catálogo de categorías y busca especialistas
+                verificados. La disponibilidad se actualiza al elegir fecha
+                y hora; solo se muestran perfiles aprobados por administración.
+            </p>
+
+            <div class="filtros-tarjeta">
+                <div class="filtros-grid">
+                    <div class="campo">
+                        <label for="filtro-especialidad">Categoría de atención</label>
+                        <select class="select-simple" id="filtro-especialidad"></select>
+                    </div>
+                    <div class="campo">
+                        <label for="buscar-psicologo">Buscar por nombre</label>
+                        <input type="text" class="input-simple" id="buscar-psicologo" placeholder="Ej: Carlos">
+                    </div>
+                </div>
+            </div>
+
+            <section class="psicologo-grid" id="grid-psicologos"></section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL: agendar cita -->
+    <div class="modal-overlay" id="modal-agendar" role="dialog" aria-modal="true">
+        <div class="modal-caja">
+
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2 id="modal-agendar-titulo">Agendar cita</h2>
+                    <p>Elige fecha y hora para tu sesión virtual.</p>
+                </div>
+                <button class="btn-icono" id="cerrar-modal-agendar" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <form id="form-agendar">
+
+                <input type="hidden" id="agendar-psicologo-id">
+
+                <div class="campo oculto" id="campo-agendar-menor" style="margin-bottom: 14px;">
+                    <label for="agendar-menor">¿Para cuál menor es esta cita?</label>
+                    <select class="select-simple" id="agendar-menor"></select>
+                    <small class="campo-error" id="error-agendar-menor"></small>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="agendar-fecha">Fecha</label>
+                    <input type="date" class="input-simple" id="agendar-fecha" required>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="agendar-hora">Hora</label>
+                    <select class="select-simple" id="agendar-hora" aria-describedby="aviso-disponibilidad">
+                        <option value="08:00 AM">08:00 AM</option><option value="09:00 AM">09:00 AM</option><option value="10:00 AM">10:00 AM</option>
+                        <option value="11:00 AM">11:00 AM</option><option value="02:00 PM">02:00 PM</option><option value="03:00 PM">03:00 PM</option>
+                        <option value="04:00 PM">04:00 PM</option><option value="05:00 PM">05:00 PM</option>
+                    </select>
+                    <small class="campo-error" id="aviso-disponibilidad"></small>
+                </div>
+
+                <p class="campo-nota">
+                    La sesión será por videollamada dentro de Helpsy. El pago
+                    se confirma en el siguiente paso.
+                </p>
+
+                <div class="modal-acciones">
+                    <button type="button" class="btn btn-fantasma" id="cancelar-modal-agendar">Cancelar</button>
+                    <button type="submit" class="btn btn-primario">Continuar a pago</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-consentimiento-consulta" role="dialog" aria-modal="true" aria-labelledby="titulo-consentimiento-consulta">
+        <div class="modal-caja">
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2 id="titulo-consentimiento-consulta">Antes de confirmar tu primera consulta</h2>
+                    <p>Autorización de datos y consentimiento informado · versión 2.0</p>
+                </div>
+                <button class="btn-icono" id="cerrar-consentimiento-consulta" type="button" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div style="font-size: 13px; line-height: 1.7; color: var(--gris-700);">
+                <p>Autorizas el tratamiento de tus datos personales y sensibles de salud para gestionar tu cuenta, agenda, atención psicológica y seguimiento en Helpsy. El consentimiento informado cubre tu participación voluntaria en la consulta; puedes hacer preguntas al especialista y retirar tu consentimiento para futuras atenciones.</p>
+                <p style="margin-top: 10px;">Puedes consultar y corregir tus datos desde Mi perfil y solicitar su supresión. La solicitud será revisada; ciertos registros podrían tener obligaciones de conservación. Esta demo guarda tu aceptación localmente y no sustituye asesoría legal ni un servicio clínico.</p>
+            </div>
+            <label class="consentimiento" for="check-consentimiento-consulta" style="margin-top: 14px;">
+                <input type="checkbox" id="check-consentimiento-consulta">
+                <span class="consentimiento-check"></span>
+                <span class="consentimiento-texto">Leí y acepto la autorización de tratamiento de datos y el consentimiento informado para esta atención.</span>
+            </label>
+            <small class="campo-error" id="error-consentimiento-consulta"></small>
+            <div class="modal-acciones">
+                <button class="btn btn-fantasma" id="cancelar-consentimiento-consulta" type="button">Volver</button>
+                <button class="btn btn-primario" id="aceptar-consentimiento-consulta" type="button" disabled>Registrar y continuar al pago</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/psicologos.js" defer></script>
+
+</body>
+</html>

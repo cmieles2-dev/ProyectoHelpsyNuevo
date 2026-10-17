@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga de datos — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Sube un archivo CSV o Excel con datos de pacientes o
+                indicadores. Este avance lee el archivo de verdad en tu
+                navegador y te muestra una vista previa — todavía no lo
+                envía a una base de datos porque no hay backend conectado.
+            </p>
+
+            <div class="grid-dos">
+
+                <div class="tarjeta">
+
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Subir archivo</h2>
+                            <p>Formatos aceptados: .csv, .xlsx, .xls</p>
+                        </div>
+                    </div>
+
+                    <label class="zona-carga" id="zona-carga" for="input-archivo">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                        <strong>Arrastra tu archivo aquí</strong>
+                        <span>o haz clic para elegirlo desde tu equipo</span>
+                        <input type="file" id="input-archivo" accept=".csv,.xlsx,.xls" class="visualmente-oculto">
+                    </label>
+
+                    <div id="resultado-carga" style="margin-top: 16px;"></div>
+
+                </div>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Historial de cargas</h2>
+                            <p>Archivos subidos en este navegador.</p>
+                        </div>
+                    </div>
+                    <div id="historial-cargas"></div>
+                </div>
+
+            </div>
+
+            <section class="tarjeta" id="panel-vista-previa" style="margin-top: 16px; display:none;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Vista previa</h2>
+                        <p id="vista-previa-subtitulo"></p>
+                    </div>
+                </div>
+                <div class="tabla-envoltura">
+                    <table class="tabla-datos" id="tabla-vista-previa"></table>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+    <script src="../js/carga-datos.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talleres grupales — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo" id="info-talleres"></p>
+
+            <section class="tarjeta">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2 id="titulo-talleres">Talleres grupales</h2>
+                        <p id="contador-talleres">Cargando...</p>
+                    </div>
+                    <button class="btn btn-primario btn-sm oculto" id="btn-nuevo-taller">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Crear taller
+                    </button>
+                </div>
+                <div class="psicologo-grid" id="grid-talleres"></div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL: crear taller (solo psicólogo) -->
+    <div class="modal-overlay" id="modal-taller" role="dialog" aria-modal="true">
+        <div class="modal-caja">
+            <div class="modal-caja-encabezado">
+                <div><h2>Crear taller grupal</h2><p>Visible para todos los pacientes de Helpsy.</p></div>
+                <button class="btn-icono" id="cerrar-modal-taller" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="form-taller">
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="taller-titulo">Título</label>
+                    <input type="text" class="input-simple" id="taller-titulo" maxlength="70" placeholder="Ej: Manejo de ansiedad en grupo">
+                </div>
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="taller-descripcion">Descripción</label>
+                    <textarea class="input-simple" id="taller-descripcion" rows="3" placeholder="De qué trata el taller"></textarea>
+                </div>
+                <div class="campo-grupo dos-columnas">
+                    <div class="campo">
+                        <label for="taller-fecha">Fecha</label>
+                        <input type="date" class="input-simple" id="taller-fecha" required>
+                    </div>
+                    <div class="campo">
+                        <label for="taller-hora">Hora</label>
+                        <select class="select-simple" id="taller-hora">
+                            <option>08:00 AM</option><option>10:00 AM</option><option>02:00 PM</option><option>04:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="campo" style="margin-top: 14px;">
+                    <label for="taller-cupo">Cupo máximo</label>
+                    <input type="number" class="input-simple" id="taller-cupo" min="2" max="30" value="8">
+                </div>
+                <div class="modal-acciones">
+                    <button type="button" class="btn btn-fantasma" id="cancelar-modal-taller">Cancelar</button>
+                    <button type="submit" class="btn btn-primario">Crear taller</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/talleres.js" defer></script>
+
+</body>
+</html>

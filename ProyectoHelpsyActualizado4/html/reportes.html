@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Genera reportes descargables a partir de los datos de
+                demostración. Los de Excel se descargan directo; los de PDF
+                abren una vista de impresión para que los guardes como PDF.
+            </p>
+
+            <section class="reporte-grid">
+
+                <div class="reporte-card">
+                    <div class="reporte-card-icono icono-azul-suave">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    </div>
+                    <h3>Indicadores mensuales</h3>
+                    <p>Casos por categoría clínica (ansiedad, depresión, etc.) del mes y año actuales, en Excel.</p>
+                    <button class="btn btn-exito btn-ancho" data-reporte="indicadores">Generar Excel</button>
+                </div>
+
+                <div class="reporte-card">
+                    <div class="reporte-card-icono icono-verde-suave">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Pacientes activos</h3>
+                    <p>Listado imprimible de pacientes en tratamiento, con especialista y estado del caso.</p>
+                    <button class="btn btn-primario btn-ancho" data-reporte="pacientes">Generar PDF</button>
+                </div>
+
+                <div class="reporte-card">
+                    <div class="reporte-card-icono icono-morado-suave">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <h3>Usuarios del sistema</h3>
+                    <p>Todos los usuarios registrados en este navegador, con su rol y estado, en Excel.</p>
+                    <button class="btn btn-exito btn-ancho" data-reporte="usuarios">Generar Excel</button>
+                </div>
+
+                <div class="reporte-card">
+                    <div class="reporte-card-icono icono-naranja-suave">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                    </div>
+                    <h3>Seguimiento general</h3>
+                    <p>Resumen imprimible de sesiones y porcentaje de avance de cada caso.</p>
+                    <button class="btn btn-primario btn-ancho" data-reporte="seguimiento">Generar PDF</button>
+                </div>
+
+            </section>
+
+            <section class="tarjeta">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Reportes generados</h2>
+                        <p>Historial de lo que has descargado en este navegador.</p>
+                    </div>
+                </div>
+                <div id="historial-reportes"></div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+    <script src="../js/reportes.js" defer></script>
+
+</body>
+</html>

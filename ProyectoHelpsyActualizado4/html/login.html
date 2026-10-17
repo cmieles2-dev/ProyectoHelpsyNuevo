@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="auth-shell">
+
+        <section class="auth-hero">
+            <div class="auth-hero-logo">
+                <svg viewBox="0 0 32 32" fill="none"><path d="M16 3c-2 3-6 5-10 5v8c0 8 5.5 12.5 10 13.5C20.5 28.5 26 24 26 16V8c-4 0-8-2-10-5Z" fill="white" fill-opacity="0.16"/><path d="M13 16h2.5v-2.5a.5.5 0 0 1 1 0V16H19a.5.5 0 0 1 0 1h-2.5v2.5a.5.5 0 0 1-1 0V17H13a.5.5 0 0 1 0-1Z" fill="white"/></svg>
+                <span>Helpsy</span>
+            </div>
+
+            <h1>Gestión de salud mental, ordenada en un solo lugar</h1>
+            <p>
+                Consulta indicadores, da seguimiento a pacientes y administra
+                usuarios de tu red de salud desde un mismo panel.
+            </p>
+
+            <div class="auth-hero-datos">
+                <div class="auth-hero-dato"><strong>+1.500</strong><span>usuarios registrados</span></div>
+                <div class="auth-hero-dato"><strong>850</strong><span>pacientes activos</span></div>
+                <div class="auth-hero-dato"><strong>8</strong><span>indicadores en seguimiento</span></div>
+            </div>
+
+        </section>
+
+        <section class="auth-panel">
+            <div class="auth-form-card">
+
+                <h2>Inicia sesión en Helpsy</h2>
+                <p class="auth-form-subtitulo">
+                    Ingresa con tu correo y contraseña. Si tu cuenta es nueva,
+                    regístrate primero.
+                </p>
+
+                <form id="form-login" novalidate>
+
+                    <div class="campo">
+                        <label for="email">Correo electrónico</label>
+                        <div class="campo-input">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="6" y1="15" x2="10" y2="15"/><circle cx="9" cy="10" r="1.5"/></svg>
+                            <input type="email" id="email" name="email" placeholder="nombre@correo.com" autocomplete="username" aria-describedby="error-email" required>
+                        </div>
+                        <small class="campo-error" id="error-email"></small>
+                        <p class="campo-nota oculto" id="aviso-verificacion-login" role="status">
+                            Este correo aún no está verificado.
+                            <a id="link-verificacion-login" href="#">Generar enlace de verificación de prueba</a>
+                        </p>
+                    </div>
+
+                    <div class="campo">
+                        <label for="password">Contraseña</label>
+                        <div class="campo-input">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            <input type="password" id="password" name="password" placeholder="Tu contraseña" autocomplete="current-password" aria-describedby="error-password">
+                        </div>
+                        <small class="campo-error" id="error-password"></small>
+                    </div>
+
+                    <button type="submit" class="btn btn-primario btn-ancho">
+                        Iniciar sesión
+                    </button>
+
+                </form>
+
+                <div class="auth-pie-enlaces">
+                    <a href="#" id="link-olvido">¿Olvidaste tu contraseña?</a>
+                    <a href="registro.html">Registrarse</a>
+                </div>
+
+                <p class="auth-pie">
+                    Prototipo local: sesiones, verificación y recuperación se
+                    simulan en este navegador. No es seguro para producción;
+                    se requiere backend para enviar correos y validar tokens.
+                    Las cuentas de prueba están abajo.
+                </p>
+
+                <details class="credenciales-demo">
+                    <summary>Ver credenciales de prueba</summary>
+                    <div class="tabla-envoltura">
+                        <table class="tabla-datos">
+                            <thead><tr><th>Nombre</th><th>Rol</th><th>Correo</th><th>Contraseña</th></tr></thead>
+                            <tbody id="lista-credenciales-demo"></tbody>
+                        </table>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Modal de recuperación; el enlace de correo se simula localmente hasta conectar un backend. -->
+    <div class="modal-overlay" id="modal-recuperar" role="dialog" aria-modal="true">
+        <div class="modal-caja">
+
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2 id="recuperar-titulo">Recuperar contraseña</h2>
+                    <p id="recuperar-subtitulo">Ingresa tu correo para generar un enlace temporal.</p>
+                </div>
+                <button class="btn-icono" id="cerrar-modal-recuperar" aria-label="Cerrar" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <!-- Paso 1: solicitar enlace de recuperación -->
+            <form id="form-recuperar-paso1">
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="recuperar-email">Correo electrónico</label>
+                    <input type="email" class="input-simple" id="recuperar-email" autocomplete="email" required>
+                </div>
+                <p class="campo-nota">
+                    Prototipo: aquí no se envía correo. El enlace de prueba
+                    aparecerá a continuación y vencerá en 15 minutos.
+                </p>
+                <p class="campo-nota oculto" id="recuperar-enlace" role="status">
+                    Enlace temporal de prueba: <a id="link-restablecer" href="#">Abrir enlace</a>
+                </p>
+                <div class="modal-acciones">
+                    <button type="submit" class="btn btn-primario btn-ancho">Generar enlace</button>
+                </div>
+            </form>
+
+            <!-- Paso 2: nueva contraseña tras validar el token temporal -->
+            <form id="form-recuperar-paso2" class="oculto">
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="recuperar-password-nueva">Nueva contraseña</label>
+                    <input type="password" class="input-simple" id="recuperar-password-nueva" placeholder="Mínimo 6 caracteres">
+                </div>
+                <div class="campo">
+                    <label for="recuperar-password-confirmar">Confirmar nueva contraseña</label>
+                    <input type="password" class="input-simple" id="recuperar-password-confirmar" placeholder="Repite la contraseña" aria-describedby="error-recuperar-password">
+                    <small class="campo-error" id="error-recuperar-password"></small>
+                </div>
+                <div class="modal-acciones">
+                    <button type="submit" class="btn btn-primario btn-ancho">Cambiar contraseña</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/login.js" defer></script>
+
+</body>
+</html>

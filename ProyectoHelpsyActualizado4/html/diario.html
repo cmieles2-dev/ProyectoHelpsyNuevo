@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diario emocional — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Registra cómo te sientes hoy. Tu psicólogo puede ver esta
+                tendencia para preparar mejor tus sesiones (esto no
+                reemplaza contarle lo que sientes en la cita). El diario no
+                se monitorea en tiempo real.
+            </p>
+
+            <div class="campo oculto" id="campo-diario-menor" style="margin-bottom: 16px; max-width: 360px;">
+                <label for="diario-menor">Registrando el estado emocional de</label>
+                <select class="select-simple" id="diario-menor"></select>
+            </div>
+
+            <section class="tarjeta">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>¿Cómo se siente hoy?</h2>
+                        <p>Elige la opción que más se acerque.</p>
+                    </div>
+                </div>
+                <p class="campo-nota">Las alertas automáticas están desactivadas hasta que sus reglas sean validadas por especialistas. Este diario no detecta ni predice crisis.</p>
+
+                <div class="animo-grid" id="animo-grid"></div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="diario-notas">Notas (opcional)</label>
+                    <textarea class="input-simple" id="diario-notas" rows="3" placeholder="¿Qué pasó hoy que influyó en tu ánimo?"></textarea>
+                </div>
+
+                <label class="campo-nota" style="display:flex; align-items:flex-start; gap:8px; margin-bottom:14px;">
+                    <input type="checkbox" id="diario-nota-privada">
+                    <span>Nota privada: no se compartirá con tu especialista.</span>
+                </label>
+
+                <button class="btn btn-primario" id="btn-guardar-diario">Guardar registro de hoy</button>
+                <p id="aviso-ya-registrado" class="campo-nota oculto"></p>
+            </section>
+
+            <section class="tarjeta" style="margin-top:16px;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Instrumentos de seguimiento</h2>
+                        <p>Aplica una versión oficial validada y registra aquí el puntaje para recibir orientación.</p>
+                    </div>
+                </div>
+                <div class="filtros-grid">
+                    <div class="campo">
+                        <label for="instrumento-categoria">Categoría</label>
+                        <select class="select-simple" id="instrumento-categoria">
+                            <option value="bienestar">Bienestar</option>
+                            <option value="ansiedad">Ansiedad</option>
+                            <option value="depresion">Depresión</option>
+                            <option value="estres">Estrés</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="instrumento-nombre">Instrumento aplicado</label>
+                        <select class="select-simple" id="instrumento-nombre"></select>
+                    </div>
+                    <div class="campo">
+                        <label for="instrumento-puntaje">Puntaje obtenido</label>
+                        <input type="number" class="input-simple" id="instrumento-puntaje" min="0" step="1" required>
+                    </div>
+                    <div class="campo">
+                        <label for="instrumento-maximo">Puntaje máximo</label>
+                        <input type="number" class="input-simple" id="instrumento-maximo" min="1" step="1" value="25" readonly>
+                    </div>
+                </div>
+                <button class="btn btn-primario" id="btn-guardar-instrumento" type="button">Guardar resultado</button>
+                <p class="campo-nota" style="margin-top:8px;">La orientación no es un diagnóstico ni reemplaza la interpretación profesional. Helpsy no aplica aquí las preguntas oficiales del instrumento.</p>
+                <div id="orientacion-instrumento" class="oculto" style="margin-top:14px;"></div>
+                <div id="lista-instrumentos" style="margin-top:14px;"></div>
+            </section>
+
+            <section class="grid-dos" style="margin-top: 16px;">
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Tendencia</h2>
+                            <p>Estado de ánimo del 1 (bajo) al 5 (muy bien).</p>
+                        </div>
+                        <div role="group" aria-label="Periodo de la gráfica" style="display:flex; gap:6px;">
+                            <button type="button" class="btn btn-primario btn-sm" data-periodo="7" aria-pressed="true">7 días</button>
+                            <button type="button" class="btn btn-fantasma btn-sm" data-periodo="30" aria-pressed="false">30 días</button>
+                        </div>
+                    </div>
+                    <canvas id="grafico-diario" height="140"></canvas>
+                </div>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Historial</h2>
+                            <p id="contador-diario">Cargando...</p>
+                        </div>
+                    </div>
+                    <div id="lista-diario" style="max-height: 320px; overflow-y: auto;"></div>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js" defer></script>
+    <script src="../js/diario.js" defer></script>
+
+</body>
+</html>

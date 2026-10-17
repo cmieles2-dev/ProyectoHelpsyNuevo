@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguimiento de pacientes — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Aquí ves el avance de cada paciente: sesiones tomadas,
+                especialista a cargo y qué tan cerca está de completar su
+                tratamiento. Usa los filtros o el buscador de la derecha
+                para encontrar un caso puntual.
+            </p>
+
+            <div class="filtros-tarjeta">
+
+                <div class="filtros-grid">
+                    <div class="campo">
+                        <label for="f-departamento">Departamento</label>
+                        <select class="select-simple" id="f-departamento">
+                            <option>Colombia</option>
+                            <option>Cesar</option>
+                            <option>Atlántico</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="f-red">Red de salud</label>
+                        <select class="select-simple" id="f-red">
+                            <option>Todas</option>
+                            <option>Salud de Colombia</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="f-ips">IPS / Hospital</label>
+                        <select class="select-simple" id="f-ips">
+                            <option>Todos</option>
+                            <option>Los Robles La Paz</option>
+                            <option>Los Robles Norte</option>
+                            <option>Los Robles San Miguel</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="f-tipo">Tipo de atención</label>
+                        <select class="select-simple" id="f-tipo">
+                            <option>Todos</option>
+                            <option>Tratamiento emocional</option>
+                            <option>Tratamiento de ansiedad</option>
+                            <option>Tratamiento en pareja</option>
+                            <option>Tratamiento familiar</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="filtros-grid" id="filtros-avanzados" style="display:none;">
+                    <div class="campo">
+                        <label for="f-estado">Estado del caso</label>
+                        <select class="select-simple" id="f-estado">
+                            <option>Todos</option>
+                            <option>Completado</option>
+                            <option>En progreso</option>
+                            <option>Reciente</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="f-fecha-inicial">Fecha inicial</label>
+                        <input type="date" class="input-simple" id="f-fecha-inicial">
+                    </div>
+                    <div class="campo">
+                        <label for="f-fecha-final">Fecha final</label>
+                        <input type="date" class="input-simple" id="f-fecha-final">
+                    </div>
+                </div>
+
+                <div class="filtros-acciones">
+                    <button class="btn btn-primario" id="btn-consultar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        Consultar
+                    </button>
+                    <button class="btn btn-exito" id="btn-exportar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                        Exportar Excel
+                    </button>
+                    <button class="btn btn-advertencia" id="btn-filtros">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+                        Filtros
+                    </button>
+                    <button class="btn btn-peligro" id="btn-salir">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                        Salir
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="grid-dos">
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Pacientes en seguimiento</h2>
+                            <p id="contador-resultados">Cargando...</p>
+                        </div>
+                    </div>
+                    <div class="tabla-envoltura">
+                        <table class="tabla-datos">
+                            <thead>
+                                <tr>
+                                    <th>ID</th><th>Nombre</th><th>Cédula</th><th>IPS/Hospital</th>
+                                    <th>Sesiones</th><th>Tratamiento</th><th>Seguimiento</th>
+                                    <th>Especialista</th><th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-pacientes"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="buscar-panel">
+                    <h3>Buscar</h3>
+                    <div class="buscar-campo">
+                        <label for="b-nombre">Nombre</label>
+                        <input type="text" class="input-simple" id="b-nombre" placeholder="Ej: María">
+                    </div>
+                    <div class="buscar-campo">
+                        <label for="b-cedula">Cédula</label>
+                        <input type="text" class="input-simple" id="b-cedula" placeholder="Ej: 123456">
+                    </div>
+                    <div class="buscar-campo">
+                        <label for="b-especialista">Especialista</label>
+                        <input type="text" class="input-simple" id="b-especialista" placeholder="Ej: Carola">
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" defer></script>
+    <script src="../js/seguimiento.js" defer></script>
+
+</body>
+</html>

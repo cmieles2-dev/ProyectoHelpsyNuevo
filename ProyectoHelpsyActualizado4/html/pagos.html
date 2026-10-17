@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <strong>Esta pasarela es simulada</strong> — no procesa
+                tarjetas reales ni se conecta a un banco. En producción
+                iría conectada a Wompi, PayU o una pasarela certificada
+                PCI-DSS; nunca se maneja el número de tarjeta directamente.
+            </p>
+
+            <div id="zona-checkout"></div>
+
+            <section class="tarjeta" style="margin-top: 16px;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Historial de pagos</h2>
+                        <p>Sesiones pagadas en este navegador.</p>
+                    </div>
+                </div>
+                <div class="tabla-envoltura">
+                    <table class="tabla-datos">
+                        <thead><tr><th>Fecha</th><th>Psicólogo</th><th>Concepto</th><th>Valor</th><th>Estado</th><th></th></tr></thead>
+                        <tbody id="tabla-pagos"></tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/pagos.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoría — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                RF-43 / RNF-10: cada vez que alguien abre un dato clínico
+                sensible (diario emocional, notas de consulta) de otra
+                persona, queda un registro aquí. Esta lista es de solo
+                lectura: no hay botón para editarla ni borrarla desde la
+                aplicación.
+            </p>
+
+            <section class="stat-grid" id="stat-grid-auditoria"></section>
+
+            <section class="tarjeta">
+
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Accesos a datos sensibles</h2>
+                        <p id="contador-auditoria">Cargando...</p>
+                    </div>
+                </div>
+
+                <div class="filtros-grid" style="margin-bottom: 16px;">
+                    <div class="campo">
+                        <label for="filtro-titular-auditoria">Filtrar por cédula/documento del titular</label>
+                        <input type="text" class="input-simple" id="filtro-titular-auditoria" placeholder="Ej: 40506070">
+                    </div>
+                    <div class="campo">
+                        <label for="filtro-usuario-auditoria">Filtrar por usuario</label>
+                        <input type="text" class="input-simple" id="filtro-usuario-auditoria" placeholder="Nombre de quien accedió">
+                    </div>
+                    <div class="campo">
+                        <label for="fecha-desde-auditoria">Desde</label>
+                        <input type="date" class="input-simple" id="fecha-desde-auditoria">
+                    </div>
+                    <div class="campo">
+                        <label for="fecha-hasta-auditoria">Hasta</label>
+                        <input type="date" class="input-simple" id="fecha-hasta-auditoria">
+                    </div>
+                    <div class="campo">
+                        <label for="buscar-auditoria">Buscar por recurso</label>
+                        <input type="text" class="input-simple" id="buscar-auditoria" placeholder="Ej: Diario emocional">
+                    </div>
+                </div>
+
+                <div class="tabla-envoltura">
+                    <table class="tabla-datos">
+                        <thead>
+                            <tr><th>Fecha</th><th>Quién accedió</th><th>Rol</th><th>Recurso</th><th>Titular del dato</th></tr>
+                        </thead>
+                        <tbody id="tabla-auditoria"></tbody>
+                    </table>
+                </div>
+                <div class="filtros-acciones">
+                    <button class="btn btn-fantasma" id="btn-mas-auditoria">Cargar más registros</button>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/auditoria.js" defer></script>
+
+</body>
+</html>

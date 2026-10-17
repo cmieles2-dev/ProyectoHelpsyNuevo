@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videollamada — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <div class="video-shell oculto" id="video-shell">
+
+                <div class="video-aviso-simulada">
+                    ⚠️ <strong>Sala simulada:</strong> esta demo no transmite audio ni
+                    video real. Una versión en producción necesitaría
+                    WebRTC + un servidor de señalización (o un SDK como
+                    Twilio/Agora) para conectar cámaras de verdad.
+                </div>
+
+                <div class="video-lienzo" id="video-lienzo"></div>
+
+                <div class="video-controles">
+                    <button class="video-control-btn" id="btn-mic" aria-label="Silenciar micrófono">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg>
+                    </button>
+                    <button class="video-control-btn" id="btn-camara" aria-label="Apagar cámara">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                    </button>
+                    <button class="video-control-btn colgar" id="btn-colgar" aria-label="Salir de la llamada">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1-1a2 2 0 0 1 2-.5 12.42 12.42 0 0 0 3.9.62 2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A17.5 17.5 0 0 1 4 5a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2 12.42 12.42 0 0 0 .62 3.9 2 2 0 0 1-.5 2Z"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
+                    </button>
+                </div>
+
+            </div>
+
+            <div id="detalle-cita-video" style="margin-top: 16px;"></div>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL: aviso de confidencialidad, obligatorio antes de entrar -->
+    <div class="modal-overlay visible" id="modal-confidencialidad" role="dialog" aria-modal="true" aria-labelledby="titulo-confidencialidad">
+        <div class="modal-caja">
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2 id="titulo-confidencialidad">Antes de entrar a tu sesión</h2>
+                    <p>Aviso de confidencialidad</p>
+                </div>
+            </div>
+            <div style="font-size: 12.5px; color: var(--gris-700); line-height: 1.7;">
+                <p style="margin-bottom: 10px;">
+                    Esta sesión es confidencial. La información que compartas
+                    está protegida y solo es accesible para ti y tu
+                    especialista, conforme a la normativa de protección de
+                    datos de salud (Ley 1581 de 2012 en Colombia).
+                </p>
+                <p style="margin-bottom: 10px;">
+                    Te recomendamos conectarte desde un espacio privado,
+                    usar audífonos si no estás solo/a, y evitar grabar la
+                    sesión sin el consentimiento de la otra persona.
+                </p>
+                <label class="consentimiento">
+                    <input type="checkbox" id="check-confidencialidad">
+                    <span class="consentimiento-check"></span>
+                    <span class="consentimiento-texto">
+                        Entiendo y acepto las condiciones de confidencialidad de esta sesión.
+                    </span>
+                </label>
+            </div>
+            <div class="modal-acciones">
+                <a href="citas.html" class="btn btn-fantasma">Cancelar</a>
+                <button class="btn btn-primario" id="btn-aceptar-confidencialidad" disabled>Entrar a la sesión</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/videollamada.js" defer></script>
+
+</body>
+</html>

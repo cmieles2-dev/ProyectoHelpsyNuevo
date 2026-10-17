@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi panel — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Resumen de tu actividad: cuántos pacientes tienes, tus
+                próximas sesiones y las tareas que has dejado pendientes de revisión.
+            </p>
+
+            <section class="stat-grid" id="stat-grid-psicologo"></section>
+
+            <section class="grid-dos">
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Próximas sesiones</h2>
+                            <p>Tus citas confirmadas más cercanas.</p>
+                        </div>
+                        <a href="citas.html" class="btn btn-fantasma btn-sm">Ver agenda</a>
+                    </div>
+                    <div id="proximas-citas"></div>
+                </div>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Tus pacientes</h2>
+                            <p>Personas que has atendido o tienes agendadas.</p>
+                        </div>
+                        <a href="mis-pacientes.html" class="btn btn-fantasma btn-sm">Ver todos</a>
+                    </div>
+                    <div id="lista-pacientes-resumen"></div>
+                </div>
+
+            </section>
+
+            <section class="tarjeta" style="margin-top: 16px;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Mi disponibilidad</h2>
+                        <p>RF-16: elige los días y horas en que ofreces sesiones. Un paciente (o tutor) solo verá habilitadas estas franjas al agendar.</p>
+                    </div>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label>Días que atiendes</label>
+                    <div class="chips-seleccion" id="disponibilidad-dias"></div>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label>Horas que ofreces</label>
+                    <div class="chips-seleccion" id="disponibilidad-horas"></div>
+                </div>
+
+                <button class="btn btn-primario btn-sm" id="btn-guardar-disponibilidad">Guardar disponibilidad</button>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/psicologo.js" defer></script>
+
+</body>
+</html>

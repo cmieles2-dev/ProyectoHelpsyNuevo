@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Entrando a Helpsy...</title>
+    <script src="../js/data.js"></script>
+</head>
+<body>
+    <script>
+        const sesion = HelpsyData.obtenerSesion();
+
+        if (!sesion) {
+            window.location.href = "login.html";
+        } else if (sesion.rol === "Administrador") {
+            window.location.href = "dashboard.html";
+        } else if (sesion.rol === "Psicólogo") {
+            window.location.href = "psicologo.html";
+        } else if (sesion.rol === "Tutor") {
+            window.location.href = "menores.html";
+        } else {
+            window.location.href = "paciente.html";
+        }
+    </script>
+</body>
+</html>

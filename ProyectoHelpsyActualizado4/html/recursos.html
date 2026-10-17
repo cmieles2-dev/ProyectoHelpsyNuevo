@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recursos — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Ejercicios y guías cortas para usar entre sesiones. No
+                reemplazan a tu psicólogo — son un apoyo para los momentos
+                en los que necesitas algo rápido.
+            </p>
+
+            <div class="tabs" id="tabs-recursos">
+                <button class="tab-btn activo" data-tab="respiracion">Respiración</button>
+                <button class="tab-btn" data-tab="meditacion">Meditación guiada</button>
+                <button class="tab-btn" data-tab="guias">Guías</button>
+            </div>
+
+            <!-- RESPIRACIÓN -->
+            <section class="tarjeta" id="panel-respiracion">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Respiración en caja (4-4-4-4)</h2>
+                        <p>Inhala, sostén, exhala y sostén, 4 segundos cada paso.</p>
+                    </div>
+                </div>
+
+                <div class="respiracion-zona">
+                    <div class="respiracion-circulo" id="circulo-respiracion">
+                        <span id="texto-respiracion">Listo</span>
+                    </div>
+                    <div style="display:flex; gap:10px; margin-top: 18px;">
+                        <button class="btn btn-primario" id="btn-iniciar-respiracion">Iniciar ejercicio</button>
+                        <button class="btn btn-fantasma oculto" id="btn-detener-respiracion">Detener</button>
+                    </div>
+                    <p id="ciclos-respiracion" style="font-size:11.5px; color:var(--gris-500); margin-top:10px;"></p>
+                </div>
+            </section>
+
+            <!-- MEDITACIÓN -->
+            <section class="tarjeta oculto" id="panel-meditacion">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Meditación guiada de 5 minutos</h2>
+                        <p>Lee el guion a tu ritmo mientras corre el temporizador.</p>
+                    </div>
+                    <span class="badge badge-azul" id="temporizador-meditacion">05:00</span>
+                </div>
+
+                <div class="meditacion-guion">
+                    <p>Siéntate con la espalda recta y los pies apoyados en el piso. Cierra los ojos si te sientes cómodo/a haciéndolo.</p>
+                    <p>Inhala por la nariz contando hasta 4. Sostén el aire un segundo. Exhala lento por la boca contando hasta 6.</p>
+                    <p>Repite esto tres veces, sin forzar el ritmo. Nota cómo el aire entra y sale, sin intentar cambiar nada más.</p>
+                    <p>Si tu mente se va a otro lado, está bien. Solo nota que pasó y vuelve a tu respiración, sin juzgarte por eso.</p>
+                    <p>Sigue respirando así, a tu ritmo, hasta que el temporizador termine.</p>
+                </div>
+
+                <div style="display:flex; gap:10px; margin-top: 14px;">
+                    <button class="btn btn-primario" id="btn-iniciar-meditacion">Iniciar temporizador</button>
+                    <button class="btn btn-fantasma oculto" id="btn-detener-meditacion">Detener</button>
+                </div>
+            </section>
+
+            <!-- GUÍAS -->
+            <section class="tarjeta oculto" id="panel-guias">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Bienestar por categoría</h2>
+                        <p>Información general para conversar con un profesional.</p>
+                    </div>
+                </div>
+                <div class="campo" style="max-width:360px; margin-bottom:14px;">
+                    <label for="categoria-recurso">Categoría</label>
+                    <select class="select-simple" id="categoria-recurso">
+                        <option value="ansiedad">Ansiedad y estrés</option>
+                        <option value="depresion">Depresión</option>
+                        <option value="duelo">Duelo y pérdida</option>
+                        <option value="bienestar">Bienestar emocional</option>
+                    </select>
+                </div>
+                <p class="campo-nota">Material de referencia; pendiente de revisión y aprobación por especialistas.</p>
+                <div id="lista-guias"></div>
+                <a class="btn btn-primario btn-sm" href="cuestionario.html" style="margin-top:12px;">Ir a la autoevaluación orientativa</a>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/recursos.js" defer></script>
+
+</body>
+</html>

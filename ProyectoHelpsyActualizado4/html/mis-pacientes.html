@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis pacientes — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Pacientes que te han agendado al menos una cita. Haz clic en
+                "Ver diario" para revisar su tendencia emocional antes de la sesión.
+            </p>
+
+            <section class="tarjeta">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Tus pacientes</h2>
+                        <p id="contador-pacientes">Cargando...</p>
+                    </div>
+                </div>
+                <div id="lista-pacientes"></div>
+            </section>
+
+            <section class="tarjeta oculto" id="panel-diario-paciente" style="margin-top: 16px;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2 id="titulo-diario-paciente">Diario de...</h2>
+                        <p>Evolución emocional y registros de seguimiento.</p>
+                    </div>
+                    <button class="btn btn-fantasma btn-sm" id="btn-cerrar-diario">Cerrar</button>
+                </div>
+                <div class="grid-dos" style="margin-bottom:16px;">
+                    <div>
+                        <h3 style="margin-bottom:10px;">Estado de ánimo · últimos 30 días</h3>
+                        <canvas id="grafico-paciente" height="130"></canvas>
+                    </div>
+                    <div>
+                        <h3 style="margin-bottom:10px;">Instrumentos de seguimiento</h3>
+                        <div id="lista-instrumentos-paciente"></div>
+                    </div>
+                </div>
+                <div class="tarjeta" style="margin-bottom:16px; box-shadow:none;">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h3>Registrar resultado de instrumento</h3>
+                            <p>Usa la versión oficial indicada en el protocolo clínico.</p>
+                        </div>
+                    </div>
+                    <div class="filtros-grid">
+                        <div class="campo">
+                            <label for="instrumento-categoria-paciente">Categoría</label>
+                            <select class="select-simple" id="instrumento-categoria-paciente">
+                                <option value="bienestar">Bienestar</option>
+                                <option value="ansiedad">Ansiedad</option>
+                                <option value="depresion">Depresión</option>
+                                <option value="estres">Estrés</option>
+                            </select>
+                        </div>
+                        <div class="campo">
+                            <label for="instrumento-nombre-paciente">Instrumento</label>
+                            <select class="select-simple" id="instrumento-nombre-paciente"></select>
+                        </div>
+                        <div class="campo">
+                            <label for="instrumento-puntaje-paciente">Puntaje obtenido</label>
+                            <input type="number" class="input-simple" id="instrumento-puntaje-paciente" min="0" step="1" required>
+                        </div>
+                        <div class="campo">
+                            <label for="instrumento-maximo-paciente">Puntaje máximo</label>
+                            <input type="number" class="input-simple" id="instrumento-maximo-paciente" min="1" step="1" readonly>
+                        </div>
+                    </div>
+                    <button class="btn btn-primario" id="btn-guardar-instrumento-paciente" type="button">Guardar resultado</button>
+                    <p class="campo-nota" style="margin-top:8px;">El puntaje no es un diagnóstico.</p>
+                </div>
+                <div id="contenido-diario-paciente"></div>
+                <section style="margin-top:16px; padding-top:16px; border-top:1px solid var(--gris-200);">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h3>Alertas de riesgo</h3>
+                            <p>Registro clínico privado del equipo tratante.</p>
+                        </div>
+                        <button class="btn btn-peligro btn-sm" id="btn-nueva-alerta" type="button">Registrar alerta</button>
+                    </div>
+                    <form id="form-alerta-riesgo" class="oculto">
+                        <div class="filtros-grid">
+                            <div class="campo">
+                                <label for="alerta-nivel">Nivel de atención</label>
+                                <select class="select-simple" id="alerta-nivel" required>
+                                    <option value="Seguimiento prioritario">Seguimiento prioritario</option>
+                                    <option value="Riesgo alto">Riesgo alto</option>
+                                    <option value="Riesgo inminente">Riesgo inminente</option>
+                                </select>
+                            </div>
+                            <div class="campo">
+                                <label for="alerta-descripcion">Observación clínica</label>
+                                <textarea class="input-simple" id="alerta-descripcion" rows="3" maxlength="1200" required></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-acciones">
+                            <button class="btn btn-fantasma" id="btn-cancelar-alerta" type="button">Cancelar</button>
+                            <button class="btn btn-peligro" type="submit">Guardar alerta</button>
+                        </div>
+                    </form>
+                    <div id="lista-alertas-riesgo"></div>
+                    <details style="margin-top:14px;">
+                        <summary style="cursor:pointer; font-weight:600;">Consultar protocolo de crisis</summary>
+                        <div style="margin-top:10px; line-height:1.6; font-size:12px; color:var(--gris-700);">
+                            <p>Resumen de referencia. Aplica siempre el protocolo institucional vigente y escala al equipo supervisor.</p>
+                            <ol style="margin:8px 0 8px 20px;">
+                                <li>Valora si existe peligro inmediato y confirma ubicación y medios de contacto.</li>
+                                <li>Ante una emergencia inmediata, activa el servicio de emergencias <a href="tel:123"><strong>123</strong></a>; en Colombia también está disponible la <a href="tel:106"><strong>Línea 106</strong></a> de salud mental.</li>
+                                <li>Mantén el contacto y coordina apoyo presencial seguro; no dejes sola a la persona ante peligro inminente.</li>
+                                <li>Documenta la actuación y contacta al supervisor/equipo clínico según el protocolo de la institución.</li>
+                            </ol>
+                            <p>Esta pantalla no sustituye una valoración profesional ni el protocolo local actualizado.</p>
+                        </div>
+                    </details>
+                </section>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js" defer></script>
+    <script src="../js/mis-pacientes.js" defer></script>
+
+</body>
+</html>

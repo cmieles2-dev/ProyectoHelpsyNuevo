@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supervisión — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                <strong>Límite honesto:</strong> esto registra actividad y
+                permite respaldar los datos de este navegador. No mide
+                disponibilidad real del servicio (RNF2) ni concurrencia
+                (RNF4) — eso solo se puede medir cuando exista un backend
+                desplegado en un servidor real.
+            </p>
+
+            <section class="grid-dos">
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Copia de seguridad</h2>
+                            <p>Exporta o restaura todos los datos de este navegador.</p>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-exito btn-ancho" id="btn-exportar-copia">
+                        ⬇️ Descargar copia de seguridad (.json)
+                    </button>
+
+                    <label class="campo-archivo" for="input-restaurar" id="zona-restaurar" style="margin-top: 12px;">
+                        ⬆️ Restaurar desde un archivo de copia
+                        <input type="file" id="input-restaurar" accept="application/json" class="visualmente-oculto">
+                    </label>
+
+                    <p class="campo-nota">
+                        Restaurar sobrescribe los datos actuales de este
+                        navegador con los del archivo. Úsalo con cuidado.
+                    </p>
+                </div>
+
+                <div class="tarjeta">
+                    <div class="tarjeta-encabezado">
+                        <div>
+                            <h2>Resumen del sistema</h2>
+                            <p>Estado general de los datos guardados aquí.</p>
+                        </div>
+                    </div>
+                    <div id="resumen-sistema"></div>
+                </div>
+
+            </section>
+
+            <section class="tarjeta" style="margin-top: 16px;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Registro de actividad</h2>
+                        <p id="contador-actividad">Cargando...</p>
+                    </div>
+                </div>
+                <div id="lista-actividad" style="max-height: 420px; overflow-y: auto;"></div>
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/supervision.js" defer></script>
+
+</body>
+</html>

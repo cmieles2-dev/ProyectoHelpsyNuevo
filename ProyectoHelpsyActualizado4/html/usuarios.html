@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                Administra quién tiene cuenta en Helpsy: administradores,
+                psicólogos y pacientes. Los cambios que hagas aquí se guardan
+                en este navegador (se comparten con lo que registres en
+                "Crear cuenta").
+            </p>
+
+            <section class="stat-grid" id="stat-grid-usuarios"></section>
+
+            <section class="tarjeta" id="tarjeta-verificaciones" style="margin-bottom: 20px;">
+
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Especialistas pendientes de verificación</h2>
+                        <p id="contador-pendientes">Cargando...</p>
+                    </div>
+                </div>
+
+                <p class="info-modulo" style="margin-bottom: 14px;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                    RF-07 / HU-26: un psicólogo que se registra por sí mismo no
+                    aparece en las búsquedas de pacientes ni puede iniciar sesión
+                    hasta que revises su título y registro profesional aquí.
+                </p>
+
+                <div class="tabla-envoltura">
+                    <table class="tabla-datos">
+                        <thead>
+                            <tr><th>Nombre</th><th>Cédula</th><th>Título profesional</th><th>Registro profesional</th><th>Especialidad</th><th>Estado</th><th></th></tr>
+                        </thead>
+                        <tbody id="tabla-pendientes"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+            <section class="tarjeta" style="margin-bottom:20px;">
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Categorías de atención</h2>
+                        <p>Catálogo que usan el registro y la búsqueda de especialistas.</p>
+                    </div>
+                </div>
+                <form id="form-categoria-atencion" style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+                    <input type="hidden" id="categoria-atencion-edicion">
+                    <label class="visualmente-oculto" for="nueva-categoria-atencion">Nueva categoría</label>
+                    <input type="text" class="input-simple" id="nueva-categoria-atencion" maxlength="50" placeholder="Nueva categoría" required style="flex:1; min-width:220px;">
+                    <button type="submit" class="btn btn-primario">Agregar categoría</button>
+                    <button type="button" class="btn btn-fantasma oculto" id="cancelar-edicion-categoria">Cancelar edición</button>
+                </form>
+                <div id="lista-categorias-atencion" class="lista-simple"></div>
+            </section>
+
+            <section class="tarjeta">
+
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Todos los usuarios</h2>
+                        <p id="contador-usuarios">Cargando...</p>
+                    </div>
+                    <button class="btn btn-primario btn-sm" id="btn-nuevo-usuario">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Nuevo usuario
+                    </button>
+                </div>
+
+                <div class="filtros-grid" style="margin-bottom: 16px;">
+                    <div class="campo">
+                        <label for="filtro-rol">Filtrar por rol</label>
+                        <select class="select-simple" id="filtro-rol">
+                            <option>Todos</option>
+                            <option>Administrador</option>
+                            <option>Psicólogo</option>
+                            <option>Paciente</option>
+                            <option>Tutor</option>
+                        </select>
+                    </div>
+                    <div class="campo">
+                        <label for="buscar-usuario">Buscar</label>
+                        <input type="text" class="input-simple" id="buscar-usuario" placeholder="Nombre, cédula o correo">
+                    </div>
+                </div>
+
+                <div class="tabla-envoltura">
+                    <table class="tabla-datos">
+                        <thead>
+                            <tr><th>Nombre</th><th>Cédula</th><th>Correo</th><th>Rol</th><th>Estado</th><th></th></tr>
+                        </thead>
+                        <tbody id="tabla-usuarios"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL: nuevo / editar usuario -->
+    <div class="modal-overlay" id="modal-usuario" role="dialog" aria-modal="true">
+        <div class="modal-caja">
+
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2 id="modal-titulo">Nuevo usuario</h2>
+                    <p>Se guarda en este navegador, no en un servidor real todavía.</p>
+                </div>
+                <button class="btn-icono" id="cerrar-modal-usuario" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <form id="form-usuario" novalidate>
+
+                <input type="hidden" id="usuario-id">
+                <input type="hidden" id="usuario-tipo" value="usuario">
+                <input type="hidden" id="usuario-solo-restablecer" value="false">
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="usuario-nombre">Nombre completo</label>
+                    <input type="text" class="input-simple" id="usuario-nombre" maxlength="60" aria-describedby="error-usuario-nombre">
+                    <small class="campo-error" id="error-usuario-nombre"></small>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="usuario-cedula">Cédula</label>
+                    <input type="text" class="input-simple" id="usuario-cedula" inputmode="numeric" maxlength="12" aria-describedby="error-usuario-cedula">
+                    <small class="campo-error" id="error-usuario-cedula"></small>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="usuario-email">Correo</label>
+                    <input type="email" class="input-simple" id="usuario-email" aria-describedby="error-usuario-email">
+                    <small class="campo-error" id="error-usuario-email"></small>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;" id="campo-usuario-password">
+                    <label for="usuario-password">Contraseña</label>
+                    <input type="password" class="input-simple" id="usuario-password" placeholder="Mínimo 6 caracteres" aria-describedby="error-usuario-password">
+                    <small class="campo-error" id="error-usuario-password"></small>
+                    <p class="campo-nota" id="nota-usuario-password" style="margin: 4px 0 0;"></p>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="usuario-rol">Rol</label>
+                    <select class="select-simple" id="usuario-rol">
+                        <option value="Administrador">Administrador</option>
+                        <option value="Psicólogo">Psicólogo</option>
+                        <option value="Paciente">Paciente</option>
+                        <option value="Tutor">Tutor</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="usuario-estado">Estado</label>
+                    <select class="select-simple" id="usuario-estado">
+                        <option>Activo</option>
+                        <option>Inactivo</option>
+                    </select>
+                </div>
+
+                <div class="modal-acciones">
+                    <button type="button" class="btn btn-fantasma" id="cancelar-modal-usuario">Cancelar</button>
+                    <button type="submit" class="btn btn-primario">Guardar usuario</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <!-- MODAL: rechazar verificación de especialista -->
+    <div class="modal-overlay" id="modal-rechazo" role="dialog" aria-modal="true">
+        <div class="modal-caja">
+
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2>Rechazar verificación</h2>
+                    <p>El especialista verá este motivo e inicio de sesión quedará bloqueado.</p>
+                </div>
+                <button class="btn-icono" id="cerrar-modal-rechazo" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <form id="form-rechazo" novalidate>
+
+                <input type="hidden" id="rechazo-id">
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="rechazo-motivo">Motivo del rechazo</label>
+                    <textarea class="input-simple" id="rechazo-motivo" rows="3" placeholder="Ej: El número de registro profesional no corresponde al título presentado." aria-describedby="error-rechazo-motivo"></textarea>
+                    <small class="campo-error" id="error-rechazo-motivo"></small>
+                </div>
+
+                <div class="modal-acciones">
+                    <button type="button" class="btn btn-fantasma" id="cancelar-modal-rechazo">Cancelar</button>
+                    <button type="submit" class="btn btn-primario">Rechazar verificación</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-solicitud-informacion" role="dialog" aria-modal="true">
+        <div class="modal-caja">
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2>Solicitar información</h2>
+                    <p>El especialista podrá revisar el motivo desde su cuenta.</p>
+                </div>
+                <button class="btn-icono" id="cerrar-modal-solicitud" aria-label="Cerrar" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <form id="form-solicitud-informacion" novalidate>
+                <input type="hidden" id="solicitud-informacion-id">
+                <div class="campo">
+                    <label for="solicitud-informacion-motivo">Información requerida</label>
+                    <textarea class="input-simple" id="solicitud-informacion-motivo" rows="4" maxlength="500" required></textarea>
+                    <small class="campo-error" id="error-solicitud-informacion"></small>
+                </div>
+                <div class="modal-acciones">
+                    <button type="button" class="btn btn-fantasma" id="cancelar-modal-solicitud">Cancelar</button>
+                    <button type="submit" class="btn btn-primario">Enviar solicitud</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/usuarios.js" defer></script>
+
+</body>
+</html>

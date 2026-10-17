@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis menores — Helpsy</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+    <div class="app-shell">
+
+        <div id="helpsy-sidebar"></div>
+
+        <main class="contenido">
+
+            <div class="topbar" id="helpsy-topbar"></div>
+
+            <p class="info-modulo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                RF-02: un menor no inicia sesión por su cuenta. Tú, como tutor,
+                gestionas su perfil, agendas sus citas y registras su estado
+                emocional en su nombre. RF-11: sin el consentimiento marcado
+                aquí, el sistema no te deja agendar citas para ese menor.
+            </p>
+
+            <section class="tarjeta">
+
+                <div class="tarjeta-encabezado">
+                    <div>
+                        <h2>Menores a tu cargo</h2>
+                        <p id="contador-menores">Cargando...</p>
+                    </div>
+                    <button class="btn btn-primario btn-sm" id="btn-nuevo-menor">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                        Registrar menor
+                    </button>
+                </div>
+
+                <div class="tabla-envoltura">
+                    <table class="tabla-datos">
+                        <thead>
+                            <tr><th>Nombre</th><th>Documento</th><th>Fecha de nacimiento</th><th>Relación</th><th>Consentimiento</th><th></th></tr>
+                        </thead>
+                        <tbody id="tabla-menores"></tbody>
+                    </table>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- MODAL: nuevo / editar menor -->
+    <div class="modal-overlay" id="modal-menor" role="dialog" aria-modal="true">
+        <div class="modal-caja">
+
+            <div class="modal-caja-encabezado">
+                <div>
+                    <h2 id="modal-menor-titulo">Registrar menor</h2>
+                    <p>Vinculado a tu cuenta de tutor. Se guarda en este navegador.</p>
+                </div>
+                <button class="btn-icono" id="cerrar-modal-menor" aria-label="Cerrar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+
+            <form id="form-menor" novalidate>
+
+                <input type="hidden" id="menor-id">
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="menor-nombre">Nombre completo del menor</label>
+                    <input type="text" class="input-simple" id="menor-nombre" maxlength="60" aria-describedby="error-menor-nombre">
+                    <small class="campo-error" id="error-menor-nombre"></small>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="menor-documento">Documento (tarjeta de identidad o registro civil)</label>
+                    <input type="text" class="input-simple" id="menor-documento" inputmode="numeric" maxlength="15" aria-describedby="error-menor-documento">
+                    <small class="campo-error" id="error-menor-documento"></small>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="menor-nacimiento">Fecha de nacimiento</label>
+                    <input type="date" class="input-simple" id="menor-nacimiento" aria-describedby="error-menor-nacimiento">
+                    <small class="campo-error" id="error-menor-nacimiento"></small>
+                </div>
+
+                <div class="campo" style="margin-bottom: 14px;">
+                    <label for="menor-relacion">Tu relación con el menor</label>
+                    <select class="select-simple" id="menor-relacion">
+                        <option>Madre</option>
+                        <option>Padre</option>
+                        <option>Tutor legal</option>
+                        <option>Acudiente autorizado</option>
+                    </select>
+                </div>
+
+                <label class="consentimiento" for="menor-consentimiento" style="margin-bottom: 6px;">
+                    <input type="checkbox" id="menor-consentimiento" aria-describedby="error-menor-consentimiento">
+                    <span class="consentimiento-check"></span>
+                    <span class="consentimiento-texto">
+                        Como tutor o acudiente legal, autorizo el tratamiento
+                        de los datos personales y sensibles del menor y doy el
+                        consentimiento informado para su atención en Helpsy
+                        (versión 2.0), conforme a las normas aplicables.
+                    </span>
+                </label>
+                <small class="campo-error" id="error-menor-consentimiento"></small>
+                <p class="campo-nota" style="margin: 6px 0 14px;">
+                    Se registran por separado la autorización de datos y el
+                    consentimiento informado con versión, fecha, tutor y
+                    titular. Sin este consentimiento vigente no podrás
+                    agendar una consulta ni registrar su estado emocional (RF-11).
+                </p>
+
+                <div class="modal-acciones">
+                    <button type="button" class="btn btn-fantasma" id="cancelar-modal-menor">Cancelar</button>
+                    <button type="submit" class="btn btn-primario">Guardar menor</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="../js/data.js" defer></script>
+    <script src="../js/common.js" defer></script>
+    <script src="../js/menores.js" defer></script>
+
+</body>
+</html>
